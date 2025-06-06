@@ -1,0 +1,8 @@
+# Where Is App
+
+Mobile application created with *React Native* +  *Expo*
+
+This app helps user to keep track of items
+
+It allows to add new items with title, description, add a photo of the item and the geographical location
+
