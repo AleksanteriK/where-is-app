@@ -1,7 +1,6 @@
 import { Text, View } from 'react-native'
 import { useState } from 'react'
 import { TextInput, Button, Image, StyleSheet } from 'react-native'
-import Header from './header'
 import * as Location from 'expo-location'
 import * as ImagePicker from 'expo-image-picker'
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -120,7 +119,6 @@ const AddItems = () => {
             {errorMsg ? <Text style={styles.error}>{errorMsg}</Text> : null}
             <Button title="Save" onPress={handleSubmit} />
             <View style={{ height: 20 }} />
-            <Header />
         </View>
     );
 };

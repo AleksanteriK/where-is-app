@@ -1,6 +1,6 @@
-import { StyleSheet, Text, View } from 'react-native'
-import { Link } from 'expo-router'
-import { Pressable} from 'react-native'
+import { use } from 'react';
+import { StyleSheet, Text, View, Pressable } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 const styles = StyleSheet.create({
     container: {
@@ -21,32 +21,34 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         backgroundColor: 'grey',
         borderRadius: 8,
+        marginBottom: 10,
     },
-})
+});
 
-const App = () => {
+function Home ({ navigation }) {
     return (
         <View style={styles.container}>
             <Text style={styles.title}>Where Is App</Text>
-            <Link style={styles.link} href="/showItemScreen" asChild>
-                <Pressable style={({ pressed }) => [
+            <Pressable
+                style={({ pressed }) => [
                     styles.link,
                     { backgroundColor: pressed ? '#555' : 'grey' }
-                ]}>
-                    <Text style={{ color: 'white', fontSize: 15 }}>Show Items</Text>
-                </Pressable>
-            </Link>
-                <View style={{ height: 20 }} />
-            <Link style={styles.link} href="/addItems" asChild>
-                <Pressable style={({ pressed }) => [
+                ]}
+                onPress={() => navigation.navigate('ShowItemScreen')}
+            >
+                <Text style={{ color: 'white', fontSize: 15 }}>Show Items</Text>
+            </Pressable>
+            <Pressable
+                style={({ pressed }) => [
                     styles.link,
                     { backgroundColor: pressed ? '#555' : 'grey' }
-                ]}>
-                    <Text style={{ color: 'white', fontSize: 15 }}>Add New</Text>
-                </Pressable>
-            </Link>
+                ]}
+                onPress={() => navigation.navigate('AddItems')}
+            >
+                <Text style={{ color: 'white', fontSize: 15 }}>Add New</Text>
+            </Pressable>
         </View>
-    )
-}
+    );
+};
 
-export default App
+export default Home;

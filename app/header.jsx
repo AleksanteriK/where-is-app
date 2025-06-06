@@ -1,6 +1,5 @@
 import React from 'react'
 import { View, StyleSheet } from 'react-native'
-import { Link } from 'expo-router'
 import { Pressable, Text } from 'react-native'
 
 const styles = StyleSheet.create({

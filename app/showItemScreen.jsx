@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Text, View, StyleSheet, FlatList } from 'react-native'
-import Header from './header'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { Image } from 'react-native'
 
@@ -36,7 +35,6 @@ const ShowItemScreen = () => {
 
     return (
         <View style={styles.container}>
-            <Header />
             <Text style={styles.text}>Items:</Text>
             <FlatList
                 data={items}
