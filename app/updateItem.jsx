@@ -32,11 +32,12 @@ const styles = StyleSheet.create({
     },
 })
 
-const AddItems = () => {
-    const [title, setTitle] = useState('')
-    const [description, setDescription] = useState('')
-    const [image, setImage] = useState(null)
-    const [location, setLocation] = useState(null)
+const UpdateItems = ({ route }) => {
+    const { itemToBeUpdated, index } = route.params
+    const [title, setTitle] = useState(itemToBeUpdated.title)
+    const [description, setDescription] = useState(itemToBeUpdated.description)
+    const [image, setImage] = useState(itemToBeUpdated.image)
+    const [location, setLocation] = useState(itemToBeUpdated.location)
     const [errorMsg, setErrorMsg] = useState('')
     const [showSuccess, setShowSuccess] = useState(false)
 
@@ -53,16 +54,25 @@ const AddItems = () => {
         }
     }
 
-    const saveItem = async (item) => {
+    const updateItem = async (updatedItem) => {
         try {
             const existing = await AsyncStorage.getItem('items')
             const itemscollection = existing ? JSON.parse(existing) : []
-            itemscollection.push(item);
+
+            if (index >= 0 && index < itemscollection.length) {
+                itemscollection[index] = updatedItem
+            } 
+            
+            else {
+                setErrorMsg('An error occurred when trying to locate the item from records')
+                return
+            }
+
             await AsyncStorage.setItem('items', JSON.stringify(itemscollection))
         } 
         
         catch (e) {
-            setErrorMsg('Failed to save item.')
+            setErrorMsg('Failed to update item.')
         }
 
         finally {
@@ -79,19 +89,15 @@ const AddItems = () => {
 
         setErrorMsg('')
 
-        const item = {
-            title,
-            description,
-            image,
-            location,
-            createdAt: new Date().toISOString(),
+        const updatedItem = {
+        ...itemToBeUpdated,
+        title,
+        description,
+        image,
+        location,
         }
 
-        await saveItem(item)
-        setTitle('')
-        setDescription('')
-        setImage(null)
-        setLocation(null)
+        await updateItem(updatedItem)
     }
 
     const getLocation = async () => {
@@ -128,12 +134,12 @@ const AddItems = () => {
                     Location: {location.latitude}, {location.longitude}
                 </Text>
             )}
-            <Button title="Save" onPress={handleSubmit} />
+            <Button title="Update" onPress={handleSubmit} />
             <View style={{ height: 20 }} />
             {errorMsg ? <Text style={styles.error}>{errorMsg}</Text> : null}
-            {showSuccess && <Text style={{ color: 'green', marginBottom: 10 }}>Item saved!</Text>}
+            {showSuccess && <Text style={{ color: 'green', marginBottom: 10 }}>Item updated!</Text>}
         </View>
     )
 }
 
-export default AddItems
+export default UpdateItems

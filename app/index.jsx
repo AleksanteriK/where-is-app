@@ -1,6 +1,4 @@
-import { use } from 'react';
-import { StyleSheet, Text, View, Pressable } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import { StyleSheet, Text, View, Pressable } from 'react-native'
 
 const styles = StyleSheet.create({
     container: {
@@ -23,7 +21,7 @@ const styles = StyleSheet.create({
         borderRadius: 8,
         marginBottom: 10,
     },
-});
+})
 
 function Home ({ navigation }) {
     return (
@@ -36,7 +34,7 @@ function Home ({ navigation }) {
                 ]}
                 onPress={() => navigation.navigate('ShowItemScreen')}
             >
-                <Text style={{ color: 'white', fontSize: 15 }}>Show Items</Text>
+            <Text style={{ color: 'white', fontSize: 15 }}>Show Items</Text>
             </Pressable>
             <Pressable
                 style={({ pressed }) => [
@@ -45,10 +43,10 @@ function Home ({ navigation }) {
                 ]}
                 onPress={() => navigation.navigate('AddItems')}
             >
-                <Text style={{ color: 'white', fontSize: 15 }}>Add New</Text>
+            <Text style={{ color: 'white', fontSize: 15 }}>Add New</Text>
             </Pressable>
         </View>
-    );
-};
+    )
+}
 
-export default Home;
+export default Home
