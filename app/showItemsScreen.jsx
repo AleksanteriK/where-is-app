@@ -26,12 +26,6 @@ const styles = StyleSheet.create({
 const ShowItemScreen = ({ navigation }) => {
     const [items, setItems] = useState([])
 
-    const handleUpdate = async (index, updatedItem) => {
-        const updatedItems = items.map((item, idx) => (idx === index ? updatedItem : item))
-        setItems(updatedItems)
-        await AsyncStorage.setItem('items', JSON.stringify(updatedItems))
-    }
-
     const handleDelete = async (index) => {
         const updatedItems = items.filter((_, idx) => idx !== index)
         setItems(updatedItems)
@@ -82,14 +76,14 @@ const ShowItemScreen = ({ navigation }) => {
                         <Text>Created At: {new Date(item.createdAt).toLocaleString()}</Text>
                         <View style={{ height: 10 }} />
                         <Button
-                            title="Update"
-                            color="green"
-                            onPress={() => navigation.navigate('UpdateItems', {itemToBeUpdated: item, index})}
-                        />
-                        <Button
                             title="View"
                             color="blue"
                             onPress={() => navigation.navigate('ViewOneItem', {selectedItem: item})}
+                        />
+                        <Button
+                            title="Update"
+                            color="green"
+                            onPress={() => navigation.navigate('UpdateItems', {itemToBeUpdated: item, index})}
                         />
                         <Button
                             title="Delete"

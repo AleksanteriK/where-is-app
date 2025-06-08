@@ -9,4 +9,3 @@ This app helps users to keep track of items.
 - Add new items with a title and description
 - Attach a photo of the item
 - Save the geographical location of each item
-
